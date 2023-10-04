@@ -12,25 +12,47 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
-  List<ContactListResponse> _contactListResponse = [];
+  // List<ContactListResponse> _contactListResponse = [];
 
-  void getContact() {
-    Dio()
-        .get(
-            'https://my-json-server.typicode.com/hadihammurabi/flutter-webservice/contacts')
-        .then(
-      (value) {
-        List<dynamic> _contactData = value.data;
+  // void getContact() {
+  //   Dio()
+  //       .get(
+  //           'https://my-json-server.typicode.com/hadihammurabi/flutter-webservice/contacts')
+  //       .then(
+  //     (value) {
+  //       List<dynamic> _contactData = value.data;
 
-        for (var element in _contactData) {
-          _contactListResponse.add(
-            ContactListResponse.fromJson(element),
-          );
-        }
+  //       for (var element in _contactData) {
+  //         _contactListResponse.add(
+  //           ContactListResponse.fromJson(element),
+  //         );
+  //       }
 
-        setState(() {});
-      },
+  //       setState(() {});
+  //     },
+  //   );
+  // }
+
+  Future<List<ContactListResponse>> getContact() async {
+    List<ContactListResponse> contatcList = [];
+    final response = await Dio().get(
+      'https://my-json-server.typicode.com/hadihammurabi/flutter-webservice/contacts',
     );
+    print(response.statusCode);
+
+    if (response.statusCode == 200) {
+      List<dynamic> contactData = response.data;
+
+      for (var element in contactData) {
+        contatcList.add(
+          ContactListResponse.fromJson(element),
+        );
+      }
+    } else {
+      throw Exception('Data Ini Error');
+    }
+
+    return contatcList;
   }
 
   @override
@@ -48,12 +70,21 @@ class _ContactScreenState extends State<ContactScreen> {
         ),
       ),
       body: Center(
-        child: ListView.builder(
-          itemCount: _contactListResponse.length,
-          itemBuilder: (context, index) {
-            return Text(
-              _contactListResponse[index].name,
-            );
+        child: FutureBuilder<List<ContactListResponse>>(
+          future: getContact(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return const Text('Data Error');
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data?.length,
+                itemBuilder: (context, index) {
+                  return Text(snapshot.data?[index].name ?? "");
+                },
+              );
+            }
           },
         ),
       ),
