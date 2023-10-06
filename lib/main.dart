@@ -1,6 +1,11 @@
-import 'package:belajar_api/screen/contact_screen.dart';
+import 'package:belajar_api/sreen/contact/contact_screen.dart';
+import 'package:belajar_api/sreen/contact/contact_view_model.dart';
+import 'package:belajar_api/sreen/login/login_screen.dart';
+import 'package:belajar_api/sreen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+String urlLogin = "";
 void main() {
   runApp(const MyApp());
 }
@@ -11,13 +16,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ContactViewModel>(
+          create: (context) => ContactViewModel(),
+        ),
+        ChangeNotifierProvider<LoginViewModel>(
+          create: (context) => LoginViewModel(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const LoginScreen(),
       ),
-      home: const ContactScreen(),
     );
   }
 }
