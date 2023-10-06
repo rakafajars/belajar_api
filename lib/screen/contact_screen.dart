@@ -102,10 +102,6 @@ class _ContactScreenState extends State<ContactScreen> {
 
   void getToken() async {
     SharedPreferences sharedPref = await SharedPreferences.getInstance();
-
-    print(
-      sharedPref.getString('token'),
-    );
   }
 
   TextEditingController usernameController = TextEditingController();
@@ -128,46 +124,25 @@ class _ContactScreenState extends State<ContactScreen> {
           'Contact API',
         ),
       ),
-      body: Column(
-        children: [
-          TextField(
-            controller: usernameController,
-          ),
-          TextField(
-            controller: passwordController,
-          ),
-          ElevatedButton(
-            child: Text(
-              'Login',
-            ),
-            onPressed: () {
-              login(
-                username: usernameController.text,
-                password: passwordController.text,
+      body: Center(
+        child: FutureBuilder<List<ContactListResponse>>(
+          future: getContact(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return const Text('Data Error');
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data?.length,
+                itemBuilder: (context, index) {
+                  return Text(snapshot.data?[index].name ?? "");
+                },
               );
-            },
-          ),
-        ],
+            }
+          },
+        ),
       ),
-      // body: Center(
-      //   child: FutureBuilder<List<ContactListResponse>>(
-      //     future: getContact(),
-      //     builder: (context, snapshot) {
-      //       if (snapshot.connectionState == ConnectionState.waiting) {
-      //         return const CircularProgressIndicator();
-      //       } else if (snapshot.hasError) {
-      //         return const Text('Data Error');
-      //       } else {
-      //         return ListView.builder(
-      //           itemCount: snapshot.data?.length,
-      //           itemBuilder: (context, index) {
-      //             return Text(snapshot.data?[index].name ?? "");
-      //           },
-      //         );
-      //       }
-      //     },
-      //   ),
-      // ),
     );
   }
 }
