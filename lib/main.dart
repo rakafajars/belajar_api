@@ -1,5 +1,7 @@
 import 'package:belajar_api/sreen/contact/contact_screen.dart';
 import 'package:belajar_api/sreen/contact/contact_view_model.dart';
+import 'package:belajar_api/sreen/dice_bear/dice_bear_screen.dart';
+import 'package:belajar_api/sreen/dice_bear/dice_bear_view_model.dart';
 import 'package:belajar_api/sreen/login/login_screen.dart';
 import 'package:belajar_api/sreen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<LoginViewModel>(
           create: (context) => LoginViewModel(),
         ),
+        ChangeNotifierProvider<DiceBearViewModel>(
+          create: (context) => DiceBearViewModel(),
+        )
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -31,7 +36,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const LoginScreen(),
+        home: const DiceBearScreen(),
       ),
     );
   }
