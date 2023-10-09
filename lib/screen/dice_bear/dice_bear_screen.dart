@@ -1,4 +1,4 @@
-import 'package:belajar_api/sreen/dice_bear/dice_bear_view_model.dart';
+import 'package:belajar_api/screen/dice_bear/dice_bear_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';

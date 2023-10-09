@@ -1,5 +1,5 @@
 import 'package:belajar_api/model/api/auth_api.dart';
-import 'package:belajar_api/sreen/contact/contact_screen.dart';
+import 'package:belajar_api/screen/contact/contact_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 

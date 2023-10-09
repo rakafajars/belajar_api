@@ -1,4 +1,4 @@
-import 'package:belajar_api/sreen/contact/contact_view_model.dart';
+import 'package:belajar_api/screen/contact/contact_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
