@@ -1,3 +1,4 @@
+import 'package:belajar_api/model/api/valorant_api.dart';
 import 'package:belajar_api/model/search_movie_model.dart';
 import 'package:belajar_api/screen/movie/movie_detail_screen.dart';
 import 'package:belajar_api/screen/movie/movie_view_model.dart';

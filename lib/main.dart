@@ -7,6 +7,8 @@ import 'package:belajar_api/screen/login/login_view_model.dart';
 import 'package:belajar_api/screen/movie/movie_detail_bloc/movie_detail_bloc.dart';
 import 'package:belajar_api/screen/movie/movie_view_model.dart';
 import 'package:belajar_api/screen/movie/search_movie_screen.dart';
+import 'package:belajar_api/screen/valorant/valorant_agent_screen.dart';
+import 'package:belajar_api/screen/valorant/valorant_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +43,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider<MovieViewModel>(
             create: (context) => MovieViewModel(),
+          ),
+          ChangeNotifierProvider<ValorantViewModel>(
+            create: (context) => ValorantViewModel(),
           )
         ],
         child: MaterialApp(
@@ -49,7 +54,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: SearchMovieScreen(),
+          home: ValorantAgenScreen(),
         ),
       ),
     );

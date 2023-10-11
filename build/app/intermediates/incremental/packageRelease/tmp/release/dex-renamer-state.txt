@@ -1,0 +1,4 @@
+#Wed Oct 11 18:48:33 WIB 2023
+base.0=/Users/rakafajar/Documents/Project/Belajar/belajar_api/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
